@@ -5,17 +5,17 @@ import requests, json
 
 app = FastAPI()
 appid = "569a7ed269a96cc6f08a1facf32affaf"
-# appurl = "https://api.openweathermap.org/data/2.5/weather"
-appurl = "http://127.0.0.1:8000/"
+appurl = "https://api.openweathermap.org/data/2.5/weather"
+# appurl = "http://127.0.0.1:8000/"
 
 
 def get_weather_data(city_name):
     print('entered get_weather_data')
-    param = {"q": "?q="+city_name, "appid": "&appid="+appid, "units": "&units=metric"}
-    c = param.get("q")
-    a = param.get("appid")
-    u = param.get("units")
-    response = requests.get(appurl+str(c)+str(a)+str(u))
+    param = {"q": city_name, "appid": appid, "units": "metric"}
+    # c = param.get("q")
+    # a = param.get("appid")
+    # u = param.get("units")
+    response = requests.get(appurl, param)
     print(response.status_code)
     if response.status_code == 200:
         data = dict(json.loads(response.text))
